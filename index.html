@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — MapRank Agency</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Admin Styles -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- SECTION 1: AUTHENTICATION SCREEN (Shown when logged out) -->
+  <div id="authSection" class="min-vh-100 d-flex align-items-center justify-content-center p-3">
+    <div class="auth-card p-4 p-sm-5 rounded-4 shadow-2xl w-100 max-w-450 border border-slate-750 bg-slate-900">
+      <div class="text-center mb-4">
+        <div class="d-inline-flex align-items-center justify-content-center p-3 rounded-3 bg-slate-800 border border-slate-700 mb-3 shadow">
+          <img src="../assets/favicon.svg" alt="MapRank" width="40" height="40">
+        </div>
+        <h3 class="text-white fw-extrabold mb-1">Map<span class="text-accent">Rank</span> Admin</h3>
+        <p class="text-slate-400 text-xs mb-0">Secure Inquiries &amp; Client Management Portal</p>
+      </div>
+
+      <div id="loginAlert" class="alert alert-danger d-none text-xs py-2 px-3 rounded-2" role="alert"></div>
+
+      <form id="loginForm" novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label text-slate-300 text-xs fw-semibold">Admin Username</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-user-shield"></i></span>
+            <input type="text" class="form-control" id="username" name="username" placeholder="e.g. arsalan" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label text-slate-300 text-xs fw-semibold">Admin Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+            <button class="btn btn-outline-secondary text-slate-400 border border-start-0" type="button" id="togglePasswordBtn">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary-custom w-100 py-2 d-flex align-items-center justify-content-center gap-2" id="loginBtn">
+          <span id="loginSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          <span id="loginBtnText" class="fw-bold">Sign In to Dashboard</span>
+          <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
+        </button>
+      </form>
+
+      <div class="text-center mt-4 pt-3 border-top border-slate-800">
+        <a href="../index.html" class="text-slate-400 hover-text-accent text-xs">
+          <i class="fa-solid fa-arrow-left me-1"></i> Return to MapRank Website
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ADMIN DASHBOARD (Shown when authenticated) -->
+  <div id="dashboardSection" class="d-none">
+    <!-- Admin Header / Navbar -->
+    <header class="admin-navbar py-3 px-4 bg-slate-900 border-bottom border-slate-800 sticky-top">
+      <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <div class="d-flex align-items-center gap-3">
+          <a href="../index.html" class="d-flex align-items-center gap-2 text-decoration-none">
+            <img src="../assets/favicon.svg" alt="MapRank" width="32" height="32">
+            <span class="brand-title text-white fs-5">Map<span class="text-accent">Rank</span> <span class="badge bg-slate-800 text-slate-300 text-xs ms-1 border border-slate-700">Admin</span></span>
+          </a>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex align-items-center gap-2 text-xs text-slate-300 bg-slate-800 px-3 py-1.5 rounded-pill border border-slate-700">
+            <i class="fa-solid fa-user-circle text-accent"></i>
+            <span id="currentAdminName">Arsalan Abbas</span>
+          </div>
+
+          <a href="../index.html" target="_blank" class="btn btn-sm btn-outline-secondary text-slate-300 d-none d-sm-inline-flex align-items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            <span>View Site</span>
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1" id="logoutBtn">
+            <i class="fa-solid fa-right-from-bracket text-xs"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container-fluid px-3 px-md-4 py-4 max-w-1400 mx-auto">
+      
+      <!-- Metrics Row -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="metric-card p-3 rounded-3 bg-slate-850 border border-slate-750">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="text-xs text-slate-400 fw-semibold text-uppercase">Total Inquiries</span>
+              <div class="metric-icon bg-primary-subtle text-accent"><i class="fa-solid fa-inbox"></i></div>
+            </div>
+            <h3 class="text-white fw-bold mb-0" id="metricTotal">0</h3>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="metric-card p-3 rounded-3 bg-slate-850 border border-slate-750">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="text-xs text-slate-400 fw-semibold text-uppercase">New Inquiries</span>
+              <div class="metric-icon bg-success-subtle text-success"><i class="fa-solid fa-bolt"></i></div>
+            </div>
+            <h3 class="text-white fw-bold mb-0 text-success" id="metricNew">0</h3>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="metric-card p-3 rounded-3 bg-slate-850 border border-slate-750">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="text-xs text-slate-400 fw-semibold text-uppercase">In Progress</span>
+              <div class="metric-icon bg-warning-subtle text-warning"><i class="fa-solid fa-spinner"></i></div>
+            </div>
+            <h3 class="text-white fw-bold mb-0 text-warning" id="metricInProgress">0</h3>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="metric-card p-3 rounded-3 bg-slate-850 border border-slate-750">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="text-xs text-slate-400 fw-semibold text-uppercase">Completed / Closed</span>
+              <div class="metric-icon bg-info-subtle text-info"><i class="fa-solid fa-check-double"></i></div>
+            </div>
+            <h3 class="text-white fw-bold mb-0 text-info" id="metricCompleted">0</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Filter Toolbar -->
+      <div class="toolbar-box p-3 rounded-3 bg-slate-900 border border-slate-800 mb-4">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-5">
+            <div class="input-group">
+              <span class="input-group-text bg-slate-800 border-slate-700 text-slate-400"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <input type="text" class="form-control bg-slate-800 border-slate-700 text-white" id="searchInput" placeholder="Search by name, email, business, service...">
+              <button class="btn btn-slate-700 text-slate-300" type="button" id="clearSearchBtn" title="Clear Search">
+                <i class="fa-solid fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4">
+            <div class="d-flex align-items-center gap-2">
+              <label for="statusFilter" class="text-xs text-slate-400 text-nowrap mb-0">Status:</label>
+              <select class="form-select bg-slate-800 border-slate-700 text-white text-sm" id="statusFilter">
+                <option value="ALL">All Inquiries</option>
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-3 text-sm-end">
+            <button class="btn btn-sm btn-outline-accent d-inline-flex align-items-center gap-2" id="refreshBtn">
+              <i class="fa-solid fa-rotate"></i>
+              <span>Refresh Inquiries</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inquiries Table Card -->
+      <div class="card bg-slate-900 border-slate-800 shadow-xl overflow-hidden rounded-3">
+        <div class="card-header bg-slate-850 border-bottom border-slate-800 py-3 px-4 d-flex align-items-center justify-content-between">
+          <h5 class="text-white fw-bold mb-0 text-base d-flex align-items-center gap-2">
+            <i class="fa-solid fa-list-check text-accent"></i>
+            <span>Client Inquiries</span>
+          </h5>
+          <span class="badge bg-slate-800 text-accent border border-slate-700" id="inquiryCountBadge">0 records</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-dark table-hover mb-0 align-middle admin-table">
+            <thead>
+              <tr class="text-slate-400 text-xs text-uppercase tracking-wider">
+                <th scope="col" style="width: 70px;">ID</th>
+                <th scope="col">Date / Time</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Business Details</th>
+                <th scope="col">Service</th>
+                <th scope="col">Attached File</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-end" style="width: 140px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inquiriesTableBody">
+              <!-- Dynamically populated rows -->
+              <tr>
+                <td colspan="8" class="text-center py-5 text-slate-400">
+                  <div class="spinner-border spinner-border-sm text-accent me-2" role="status"></div>
+                  Loading inquiries...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL: INQUIRY DETAIL VIEW -->
+  <div class="modal fade" id="inquiryDetailModal" tabindex="-1" aria-labelledby="inquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-slate-900 border-slate-750 text-white shadow-2xl">
+        <div class="modal-header border-slate-800">
+          <h5 class="modal-title fw-bold d-flex align-items-center gap-2" id="inquiryModalLabel">
+            <i class="fa-regular fa-id-card text-accent"></i>
+            <span>Inquiry Details — #<span id="modalInquiryId"></span></span>
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4">
+            <!-- Client Info Column -->
+            <div class="col-md-6 border-end-md border-slate-800">
+              <h6 class="text-accent text-xs fw-bold text-uppercase tracking-wider mb-3">Client Information</h6>
+              
+              <div class="mb-3">
+                <span class="text-xs text-slate-400 d-block">Full Name</span>
+                <span class="fw-bold fs-6" id="modalFullName">-</span>
+              </div>
+
+              <div class="mb-3">
+                <span class="text-xs text-slate-400 d-block">Email Address</span>
+                <a href="#" id="modalEmail" class="text-accent text-decoration-none">-</a>
+              </div>
+
+              <div class="mb-3">
+                <span class="text-xs text-slate-400 d-block">Phone / WhatsApp</span>
+                <div class="d-flex align-items-center gap-2 mt-1">
+                  <span class="fw-semibold" id="modalPhone">-</span>
+                  <a href="#" id="modalWhatsAppDirect" target="_blank" class="btn btn-xs btn-success py-0 px-2" title="Direct WhatsApp Chat">
+                    <i class="fa-brands fa-whatsapp"></i> Chat
+                  </a>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <span class="text-xs text-slate-400 d-block">Business Name</span>
+                <span class="fw-semibold" id="modalBusinessName">-</span>
+              </div>
+
+              <div>
+                <span class="text-xs text-slate-400 d-block">Business Website</span>
+                <div id="modalWebsiteWrapper">-</div>
+              </div>
+            </div>
+
+            <!-- Inquiry Request Column -->
+            <div class="col-md-6">
+              <h6 class="text-accent text-xs fw-bold text-uppercase tracking-wider mb-3">Project Specifics</h6>
+
+              <div class="mb-3">
+                <span class="text-xs text-slate-400 d-block">Service Interested In</span>
+                <span class="badge bg-primary-subtle text-accent border border-primary-subtle py-1.5 px-2 mt-1 fs-7" id="modalService">-</span>
+              </div>
+
+              <div class="mb-3">
+                <span class="text-xs text-slate-400 d-block">Submission Timestamp</span>
+                <span class="text-sm text-slate-300" id="modalCreatedAt">-</span>
+              </div>
+
+              <div class="mb-3">
+                <span class="text-xs text-slate-400 d-block">Current Inquiry Status</span>
+                <div class="mt-1 d-flex align-items-center gap-2">
+                  <select class="form-select form-select-sm bg-slate-800 border-slate-700 text-white w-auto" id="modalStatusSelect">
+                    <option value="New">New</option>
+                    <option value="Contacted">Contacted</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                  <button type="button" class="btn btn-sm btn-primary-custom py-1 px-3" id="saveStatusBtn">Save</button>
+                </div>
+              </div>
+
+              <div>
+                <span class="text-xs text-slate-400 d-block mb-1">Attached File / CV</span>
+                <div id="modalAttachmentWrapper" class="p-2 rounded bg-slate-800 border border-slate-700 text-xs">
+                  None attached
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Message Column -->
+            <div class="col-12 pt-2 border-top border-slate-800">
+              <h6 class="text-accent text-xs fw-bold text-uppercase tracking-wider mb-2">Client Message / Project Scope</h6>
+              <div class="p-3 rounded-3 bg-slate-800 border border-slate-700 text-sm text-slate-200" id="modalMessage" style="white-space: pre-wrap; max-height: 220px; overflow-y: auto;">
+                -
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-slate-800 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-danger btn-sm" id="modalDeleteBtn">
+            <i class="fa-regular fa-trash-can me-1"></i> Delete Inquiry
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- App Configuration & Admin Script -->
+  <script src="../js/config.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

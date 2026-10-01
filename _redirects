@@ -1,0 +1,10 @@
+# Netlify Redirects for MapRank Agency
+
+# Proxy API calls to your remote hosted backend (e.g. Render / Railway)
+# Once you deploy your backend to Render or Railway, replace https://maprank-api.onrender.com
+# with your actual backend URL:
+# /api/*  https://maprank-api.onrender.com/api/:splat  200
+
+# Admin route clean URL
+/admin      /admin/index.html   200
+/admin/     /admin/index.html   200

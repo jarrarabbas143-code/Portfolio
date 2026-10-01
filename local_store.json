@@ -1,0 +1,43 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "username": "arsalan",
+      "password_hash": "$2a$10$IV1RFjTyDpBu3l0jR0YxMuXkH000/XIr1RK8bc1.BBzWJ0DozHZ8C",
+      "full_name": "Arsalan Abbas",
+      "email": "abbasarsalan462@gmail.com",
+      "created_at": "2026-09-29T04:25:03.648Z"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": 1,
+      "full_name": "Tariq Mahmood",
+      "email": "tariq@citydentalclinic.com",
+      "phone": "+92 300 1234567",
+      "business_name": "City Dental Clinic",
+      "website": "https://citydentalclinic.com",
+      "service": "Google Business Profile (GMB)",
+      "message": "We recently opened a new dental clinic in Lahore and need professional assistance setting up and properly optimizing our Google Business Profile.",
+      "file_path": null,
+      "file_original_name": null,
+      "status": "Contacted",
+      "created_at": "2026-09-29T04:25:40.214Z",
+      "updated_at": "2026-09-29T04:26:31.089Z"
+    },
+    {
+      "id": 3,
+      "full_name": "Bilal Khan",
+      "email": "bilal@autocare.pk",
+      "phone": "+92 333 5551234",
+      "business_name": "Autocare Specialists",
+      "website": null,
+      "service": "Both GMB & Local SEO",
+      "message": "Please review the attached project scope document for our 2 auto repair branches.",
+      "file_path": "inquiry-1790656012847-5a9a352b491f.txt",
+      "file_original_name": "maprank_project_scope.txt",
+      "status": "New",
+      "created_at": "2026-09-29T04:26:52.860Z"
+    }
+  ]
+}

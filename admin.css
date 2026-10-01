@@ -1,0 +1,141 @@
+/* ==========================================================================
+   MapRank Agency — Admin Portal Stylesheet
+   ========================================================================== */
+
+.admin-body {
+  background-color: #070c1a;
+  min-height: 100vh;
+  color: #cbd5e1;
+}
+
+.max-w-450 {
+  max-width: 450px;
+}
+
+.max-w-1400 {
+  max-width: 1400px;
+}
+
+/* Metric Cards */
+.metric-card {
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+
+.metric-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.bg-primary-subtle { background: rgba(37, 99, 235, 0.15) !important; }
+.bg-success-subtle { background: rgba(34, 197, 94, 0.15) !important; }
+.bg-warning-subtle { background: rgba(234, 179, 8, 0.15) !important; }
+.bg-info-subtle { background: rgba(56, 189, 248, 0.15) !important; }
+
+/* Status Badges */
+.badge-status {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-status-new {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badge-status-contacted {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.badge-status-in-progress {
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.badge-status-completed {
+  background: rgba(147, 51, 234, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(147, 51, 234, 0.3);
+}
+
+.badge-status-closed {
+  background: rgba(100, 116, 139, 0.2);
+  color: #94a3b8;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* Admin Table */
+.admin-table {
+  --bs-table-bg: transparent;
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.03);
+}
+
+.admin-table th {
+  background-color: #0b142c;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #1e293b;
+}
+
+.admin-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #1e293b;
+  font-size: 0.875rem;
+}
+
+/* Action Buttons */
+.btn-action-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  transition: all 0.15s ease;
+}
+
+.btn-action-icon:hover {
+  background: var(--accent-blue);
+  color: #ffffff;
+  border-color: var(--accent-blue);
+}
+
+.btn-action-icon.text-danger:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+.btn-xs {
+  font-size: 0.725rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+/* Responsive modal border */
+@media (min-width: 768px) {
+  .border-end-md {
+    border-right: 1px solid #1e293b;
+  }
+}
